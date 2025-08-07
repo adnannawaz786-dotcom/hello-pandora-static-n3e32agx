@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A warm hello message to Pandora">
+    <title>Hello Pandora</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="background-animation">
+            <div class="floating-orb orb-1"></div>
+            <div class="floating-orb orb-2"></div>
+            <div class="floating-orb orb-3"></div>
+        </div>
+        
+        <main class="content">
+            <div class="glass-card">
+                <div class="greeting-container">
+                    <h1 class="greeting-text" id="greetingText">
+                        <span class="greeting-hello">Hello</span>
+                        <span class="greeting-name">Pandora</span>
+                    </h1>
+                    <p class="greeting-subtitle">Welcome to something beautiful</p>
+                    <div class="sparkle-container">
+                        <span class="sparkle sparkle-1">✨</span>
+                        <span class="sparkle sparkle-2">✨</span>
+                        <span class="sparkle sparkle-3">✨</span>
+                    </div>
+                </div>
+                
+                <div class="message-container">
+                    <p class="message-text">
+                        Hope this brightens your day with a touch of magic and wonder.
+                    </p>
+                </div>
+                
+                <div class="interactive-element">
+                    <button class="magic-button" id="magicButton" aria-label="Add more magic">
+                        <span class="button-text">✨ Add Magic</span>
+                        <span class="button-ripple"></span>
+                    </button>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p class="footer-text">&copy; 2024 Hello Pandora Project</p>
+        </footer>
+    </div>
+
+    <script>
+        // Enhanced interactivity and animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const magicButton = document.getElementById('magicButton');
+            const greetingText = document.getElementById('greetingText');
+            const sparkles = document.querySelectorAll('.sparkle');
+            
+            // Magic button interaction
+            magicButton.addEventListener('click', function() {
+                // Add magic effect to greeting
+                greetingText.classList.add('magic-glow');
+                
+                // Animate sparkles
+                sparkles.forEach((sparkle, index) => {
+                    setTimeout(() => {
+                        sparkle.classList.add('sparkle-burst');
+                    }, index * 200);
+                });
+                
+                // Create temporary floating hearts
+                createFloatingHearts();
+                
+                // Reset effects after animation
+                setTimeout(() => {
+                    greetingText.classList.remove('magic-glow');
+                    sparkles.forEach(sparkle => {
+                        sparkle.classList.remove('sparkle-burst');
+                    });
+                }, 2000);
+            });
+            
+            // Typing animation for greeting text on load
+            setTimeout(() => {
+                greetingText.classList.add('typing-complete');
+            }, 1000);
+        });
+        
+        function createFloatingHearts() {
+            const container = document.querySelector('.container');
+            const hearts = ['💖', '💝', '💕', '💗', '🌟'];
+            
+            for (let i = 0; i < 8; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                
+                container.appendChild(heart);
+                
+                // Remove heart after animation
+                setTimeout(() => {
+                    if (heart.parentNode) {
+                        heart.parentNode.removeChild(heart);
+                    }
+                }, 5000);
+            }
+        }
+        
+        // Keyboard accessibility
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.target.id === 'magicButton') {
+                e.target.click();
+            }
+        });
+        
+        // Smooth scroll behavior for any future navigation
+        document.documentElement.style.scrollBehavior = 'smooth';
+    </script>
+</body>
+</html>
